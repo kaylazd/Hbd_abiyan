@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Happy Birthday Abiyan</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+:root {
+  --blue-dark: #06152f;
+  --blue: #1769aa;
+  --blue-light: #75c8ff;
+  --white: #f5fbff;
+  --soft: #b8d9f2;
+  --gold: #ffd88a;
+  --pink: #ff9bb8;
+  --ease: cubic-bezier(.22,.8,.3,1);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--white);
+  background:
+    radial-gradient(circle at 20% 10%, rgba(55,145,220,.30), transparent 28%),
+    radial-gradient(circle at 90% 80%, rgba(35,93,170,.25), transparent 30%),
+    linear-gradient(145deg, #030b1b, #071d3d 48%, #041126);
+  background-attachment: fixed;
+}
+
+/* ============ BACKGROUND ============ */
+.background { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+
+.glow { position: absolute; border-radius: 50%; opacity: .22; }
+.glow.one { width: 180px; height: 180px; background: radial-gradient(circle, #228bd0, transparent 70%); top: -70px; left: -50px; }
+.glow.two { width: 230px; height: 230px; background: radial-gradient(circle, #174a9c, transparent 70%); right: -100px; bottom: -80px; }
+
+.star {
+  position: absolute;
+  width: 2px; height: 2px;
+  border-radius: 50%;
+  background: white;
+  opacity: .3;
+  animation: twinkle 4s ease-in-out infinite;
+  will-change: opacity;
+}
+@keyframes twinkle {
+  0%, 100% { opacity: .2; }
+  50%      { opacity: .85; }
+}
+
+/* ============ PAGE / STEPPER ============ */
+.container {
+  position: relative; z-index: 2;
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 16px;
+  padding: 20px 16px calc(20px + env(safe-area-inset-bottom));
+}
+
+.stepper {
+  display: flex;
+  gap: 6px;
+  width: 100%;
+  max-width: 460px;
+  opacity: 0;
+  transition: opacity .4s var(--ease);
+}
+.stepper.show { opacity: 1; }
+.stepper .dot {
+  flex: 1;
+  height: 3px;
+  border-radius: 3px;
+  background: rgba(255,255,255,.12);
+  overflow: hidden;
+  position: relative;
+}
+.stepper .dot::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, var(--blue-light), var(--white));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .5s var(--ease);
+  border-radius: 3px;
+}
+.stepper .dot.done::after,
+.stepper .dot.current::after { transform: scaleX(1); }
+.stepper .dot.current::after { animation: pulseDot 1.6s ease-in-out infinite; }
+@keyframes pulseDot { 0%,100% { opacity: 1; } 50% { opacity: .55; } }
+
+.screen { display: none; width: 100%; max-width: 460px; }
+.screen.active { display: block; animation: appear .55s var(--ease); }
+@keyframes appear {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============ CARD (LEBIH RINGAN) ============ */
+.card {
+  position: relative;
+  padding: 30px 22px;
+  border-radius: 28px;
+  background: linear-gradient(145deg, rgba(255,255,255,.10), rgba(255,255,255,.04));
+  border: 1px solid rgba(255,255,255,.14);
+  box-shadow: 0 12px 40px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.06);
+  overflow: hidden;
+}
+.card::before {
+  content: "";
+  position: absolute;
+  width: 150px; height: 150px;
+  top: -90px; right: -70px;
+  border-radius: 50%;
+  background: rgba(115,200,255,.12);
+}
+
+/* ============ TYPOGRAPHY ============ */
+.title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(32px, 9vw, 48px);
+  line-height: 1.05;
+  margin-bottom: 12px;
+  background: linear-gradient(110deg, #ffffff, #9bd9ff, #ffffff);
+  background-size: 220% 100%;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: shimmer 6s linear infinite;
+}
+@keyframes shimmer { to { background-position: -220% 0; } }
+
+.subtitle { color: var(--soft); font-size: 14px; line-height: 1.7; }
+.heading { font-family: 'Playfair Display', serif; font-size: 26px; margin-bottom: 10px; }
+.text { color: #c5def2; line-height: 1.75; font-size: 14px; }
+.mini { margin-top: 2px; margin-bottom: 6px; color: #7fa9c9; font-size: 11px; letter-spacing: .5px; }
+
+/* ============ OPENING DECO (BULAN SABIT) ============ */
+.birthday-deco { position: relative; height: 120px; margin-bottom: 8px; }
+.moon {
+  position: absolute; width: 68px; height: 68px;
+  top: 12px; left: 50%; transform: translateX(-50%);
+  border-radius: 50%; background: #dff4ff;
+  box-shadow: 0 0 25px rgba(150,220,255,.45);
+}
+.moon::after {
+  content: ""; position: absolute; width: 68px; height: 68px;
+  left: 21px; top: -10px; border-radius: 50%; background: #0b2850;
+}
+
+.ring { position: absolute; border: 1px solid rgba(126,207,255,.35); border-radius: 50%; }
+.ring.r1 { width: 110px; height: 110px; top: -10px; left: 50%; transform: translateX(-50%); animation: spin 40s linear infinite; }
+.ring.r2 { width: 150px; height: 150px; top: -30px; left: 50%; transform: translateX(-50%); opacity: .3; }
+@keyframes spin { to { transform: translateX(-50%) rotate(360deg); } }
+
+.spark { position: absolute; color: #a9ddff; font-size: 12px; animation: sparkle 3s ease-in-out infinite; }
+.spark.s1 { left: 23%; top: 22px; }
+.spark.s2 { right: 22%; top: 45px; animation-delay: .7s; }
+.spark.s3 { left: 30%; bottom: 10px; animation-delay: 1.4s; }
+.spark.s4 { right: 30%; bottom: 3px; animation-delay: 2.1s; }
+@keyframes sparkle { 0%,100% { opacity: .35; } 50% { opacity: 1; } }
+
+/* ============ BUTTON ============ */
+.button {
+  position: relative;
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 150px; margin-top: 22px;
+  padding: 13px 24px;
+  border: 1px solid rgba(160,220,255,.3);
+  border-radius: 50px;
+  color: white;
+  background: linear-gradient(135deg, #1878bd, #4fa9df);
+  box-shadow: 0 8px 24px rgba(24,120,189,.28);
+  font-family: inherit; font-size: 14px; font-weight: 600;
+  cursor: pointer; overflow: hidden;
+  text-decoration: none;
+  transition: transform .2s var(--ease), box-shadow .2s var(--ease);
+}
+.button:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(24,120,189,.35); }
+.button:active { transform: scale(.96); }
+.button:disabled { opacity: .45; cursor: default; }
+
+/* ============ NAME INPUT ============ */
+.field { position: relative; margin-top: 24px; }
+.field .input {
+  width: 100%;
+  padding: 19px 18px 9px;
+  border: 1px solid rgba(160,215,245,.2);
+  border-radius: 16px;
+  outline: none;
+  background: rgba(255,255,255,.055);
+  color: white;
+  font-family: inherit;
+  font-size: 15px;
+  transition: border-color .25s var(--ease);
+}
+.field .input:focus { border-color: rgba(117,200,255,.65); }
+.field label {
+  position: absolute; left: 18px; top: 16px;
+  color: #7f9fbb; font-size: 14px;
+  pointer-events: none;
+  transition: transform .2s var(--ease), color .2s var(--ease), font-size .2s var(--ease);
+}
+.field .input:focus + label,
+.field .input.filled + label {
+  transform: translateY(-9px);
+  font-size: 10.5px;
+  color: var(--blue-light);
+  letter-spacing: .4px;
+}
+
+.error { min-height: 20px; margin-top: 10px; color: #ff91aa; font-size: 12px; }
+.error.shake { animation: shakeText .3s; }
+@keyframes shakeText { 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
+
+/* ============ PIN KEYPAD ============ */
+.pin-display {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  margin: 28px 0 8px;
+}
+.pin-dot {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  border: 2px solid rgba(160,215,245,.35);
+  background: transparent;
+  transition: background .2s var(--ease), border-color .2s var(--ease), transform .2s var(--ease);
+}
+.pin-dot.filled {
+  background: var(--blue-light);
+  border-color: var(--blue-light);
+  transform: scale(1.1);
+}
+.pin-dot.error {
+  border-color: #e77892;
+  background: #e77892;
+  animation: shakeText .35s;
+}
+
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 24px auto 0;
+  max-width: 280px;
+}
+.keypad-btn {
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  border: 1px solid rgba(160,215,245,.22);
+  background: rgba(255,255,255,.055);
+  color: white;
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform .12s var(--ease), background .12s var(--ease);
+  user-select: none;
+  -webkit-user-select: none;
+}
+.keypad-btn:active {
+  transform: scale(.92);
+  background: rgba(117,200,255,.25);
+}
+.keypad-btn.empty { visibility: hidden; pointer-events: none; }
+.keypad-btn.action {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--soft);
+}
+.password-hint { margin-top: 16px; text-align: center; color: #789bb7; font-size: 11px; letter-spacing: .3px; }
+
+.game-status { min-height: 22px; color: #8db5d1; font-size: 12px; margin-top: 10px; }
+.game-progress { margin-top: 7px; color: #c7e7fa; font-size: 12px; letter-spacing: .3px; }
+
+/* ============ FISHING GAME ============ */
+.pond {
+  position: relative;
+  width: 100%;
+  height: 130px;
+  margin: 20px auto 14px;
+  border-radius: 20px;
+  overflow: hidden;
+  background: linear-gradient(180deg, #0d3866, #06213f 60%, #051a33);
+  border: 1px solid rgba(255,255,255,.08);
+  display: flex; align-items: flex-end; justify-content: center;
+}
+.bobber { position: relative; font-size: 30px; margin-bottom: 14px; animation: bobIdle 2.4s ease-in-out infinite; will-change: transform; }
+@keyframes bobIdle { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+.bobber.bite { animation: bobBite .4s ease 2; }
+@keyframes bobBite { 0%,100% { transform: translateY(0); } 50% { transform: translateY(16px); } }
+
+.reel-wrap { display: none; margin-top: 16px; }
+.reel-wrap.active { display: block; }
+
+.reel-track {
+  position: relative;
+  width: 100%;
+  height: 160px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: linear-gradient(180deg, #0a2f55, #051a33);
+  border: 1px solid rgba(255,255,255,.1);
+  touch-action: none;
+  user-select: none;
+  cursor: pointer;
+  contain: strict;
+}
+.reel-fish {
+  position: absolute; left: 50%;
+  top: 50%;
+  font-size: 24px;
+  margin-top: -14px;
+  margin-left: -14px;
+  transform: scaleX(-1);
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,.4));
+  will-change: transform;
+}
+.reel-bar {
+  position: absolute; left: 6%; width: 88%;
+  border-radius: 8px;
+  background: rgba(255,216,138,.18);
+  border: 1.5px solid rgba(255,216,138,.7);
+  will-change: transform;
+}
+.reel-progress-track { margin-top: 10px; height: 8px; border-radius: 5px; background: rgba(255,255,255,.08); overflow: hidden; }
+.reel-progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--blue-light), var(--gold)); transition: width .08s linear; }
+.reel-hint { margin-top: 8px; color: #789bb7; font-size: 11px; text-align: center; }
+
+/* ============ SONG GAME ============ */
+.song-target {
+  margin: 14px 0 4px;
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+  color: var(--soft);
+}
+.song-target span {
+  display: inline-block;
+  min-width: 46px;
+  padding: 3px 10px;
+  margin-left: 4px;
+  border-radius: 10px;
+  background: rgba(255,216,138,.14);
+  border: 1px solid rgba(255,216,138,.4);
+  color: var(--gold);
+  font-weight: 600;
+}
+.song-keys { display: flex; gap: 6px; margin: 14px auto 6px; justify-content: center; }
+.song-key {
+  flex: 1; max-width: 48px;
+  height: 110px;
+  border-radius: 0 0 13px 13px;
+  background: linear-gradient(180deg, #eaf6ff, #cfe9fb);
+  border: 1px solid rgba(160,215,245,.4);
+  border-top: none;
+  color: #0b2850;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px; font-weight: 600;
+  display: flex; align-items: flex-end; justify-content: center;
+  padding-bottom: 10px;
+  cursor: pointer;
+  box-shadow: 0 6px 14px rgba(0,0,0,.25);
+  transition: transform .12s var(--ease), background .2s;
+}
+.song-key:active { transform: translateY(3px); }
+.song-key.hint {
+  box-shadow: 0 0 0 3px rgba(255,216,138,.5);
+  animation: hintGlow 1.4s ease-in-out infinite;
+}
+@keyframes hintGlow {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(255,216,138,.35); }
+  50%      { box-shadow: 0 0 0 6px rgba(255,216,138,.6); }
+}
+.song-key.correct {
+  background: linear-gradient(180deg, #fff7de, var(--gold));
+  animation: popIn .25s var(--ease);
+}
+.song-key.wrong {
+  background: linear-gradient(180deg, #f2a5b8, #a93652);
+  color: white;
+  animation: shakeBox .25s ease;
+}
+@keyframes shakeBox { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+@keyframes popIn { 0% { transform: scale(.85); } 60% { transform: scale(1.06); } 100% { transform: scale(1); } }
+
+/* ============ CONSTELLATION GAME ============ */
+.sky-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  margin: 20px auto 12px;
+  border-radius: 20px;
+  background: radial-gradient(circle at 50% 30%, rgba(70,145,210,.14), transparent 65%);
+  border: 1px solid rgba(255,255,255,.07);
+  overflow: hidden;
+}
+.sky-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.sky-svg line {
+  stroke: var(--gold);
+  stroke-width: .6;
+  stroke-linecap: round;
+}
+.sky-star {
+  position: absolute;
+  width: 30px; height: 30px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1px solid rgba(160,220,255,.35);
+  background: rgba(30,80,140,.5);
+  display: flex; align-items: center; justify-content: center;
+  color: #cfeaff; font-size: 13px;
+  cursor: pointer;
+  transition: transform .15s var(--ease), background .2s;
+}
+.sky-star::before { content: "✦"; opacity: .8; }
+.sky-star:active { transform: translate(-50%, -50%) scale(.9); }
+.sky-star.lit {
+  background: radial-gradient(circle, #fff7de 0%, var(--gold) 60%, #b3822f 100%);
+  border-color: var(--gold);
+  color: #3a2a06;
+  animation: popIn .3s var(--ease);
+}
+.sky-star.wrong { animation: shakeBox .25s ease; border-color: #e77892; }
+
+/* ============ PHOTO CHOICE ============ */
+.photo-title { font-family: 'Playfair Display', serif; font-size: 28px; margin-bottom: 7px; }
+.photo-subtitle { color: #91b5d1; font-size: 12px; margin-bottom: 20px; }
+.photos { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.photo-option {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 18px;
+  border: 1px solid rgba(160,215,245,.2);
+  background: #0c2b4d;
+  cursor: pointer;
+  transition: transform .25s var(--ease), border-color .25s;
+}
+.photo-option img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.photo-option.wrong { border-color: #e66d88; animation: shakeBox .25s; }
+.photo-option.correct { border-color: #9ce5ff; animation: popIn .35s var(--ease); }
+.choice-result { min-height: 22px; margin-top: 15px; color: #a9cee7; font-size: 12px; }
+
+/* ============ STORY ============ */
+.story-card { margin-top: 20px; padding: 20px; border-radius: 20px; text-align: left; background: rgba(255,255,255,.045); border: 1px solid rgba(255,255,255,.09); }
+.story-card p { color: #c8e0f2; font-size: 14px; line-height: 1.85; margin-bottom: 14px; opacity: 0; transform: translateY(10px); }
+.story-card p:last-child { margin-bottom: 0; }
+.screen.active .story-card p { animation: revealP .6s var(--ease) forwards; }
+.screen.active .story-card p:nth-child(1) { animation-delay: .15s; }
+.screen.active .story-card p:nth-child(2) { animation-delay: .35s; }
+.screen.active .story-card p:nth-child(3) { animation-delay: .55s; }
+.screen.active .story-card p:nth-child(4) { animation-delay: .75s; }
+.screen.active .story-card p:nth-child(5) { animation-delay: .95s; }
+@keyframes revealP { to { opacity: 1; transform: translateY(0); } }
+
+/* ============ BONUS PHOTO ============ */
+.bonus-photo {
+  display: block;
+  width: 100%;
+  max-width: 260px;
+  aspect-ratio: 1 / 1;
+  margin: 18px auto 16px;
+  object-fit: cover;
+  border-radius: 20px;
+  border: 1px solid rgba(160,215,245,.25);
+  box-shadow: 0 12px 30px rgba(0,0,0,.3);
+}
+
+/* ============ SECRET ============ */
+.secret-box { position: relative; padding: 25px 18px; margin-top: 18px; border-radius: 22px; background: linear-gradient(145deg, rgba(90,175,230,.12), rgba(255,255,255,.035)); border: 1px solid rgba(130,205,245,.18); overflow: hidden; }
+.secret-box .text { opacity: 0; transform: translateY(8px); }
+.screen.active .secret-box .text { animation: revealP .6s var(--ease) forwards; }
+.secret-drift { position: absolute; color: rgba(180,225,250,.5); font-size: 11px; animation: driftUp 7s linear infinite; }
+@keyframes driftUp { from { transform: translateY(0); opacity: 0; } 10% { opacity: .7; } 90% { opacity: .3; } to { transform: translateY(-140px); opacity: 0; } }
+
+/* ============ CONFETTI ============ */
+.confetti { position: fixed; top: -15px; width: 6px; height: 11px; z-index: 20; animation: confettiFall linear forwards; pointer-events: none; will-change: transform; }
+@keyframes confettiFall { to { transform: translate3d(0, 110vh, 0) rotate(720deg); } }
+
+/* ============================================================
+   TRANSITION OVERLAY - STAR SWEEP (RINGAN & SMOOTH)
+   ============================================================ */
+.transition-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity .45s ease;
+}
+.transition-overlay.active { opacity: 1; }
+
+/* Layer gelap: pakai transform scale dari kiri atas (GPU-friendly) */
+.tv-star-layer {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 30%, #0a2a55, #041126 70%, #020a18);
+  transform-origin: 0% 0%;
+  transform: scale(0);
+  transition: transform 1.5s cubic-bezier(.65,.05,.35,1);
+  will-change: transform;
+}
+.transition-overlay.active .tv-star-layer {
+  transform: scale(2.4);
+}
+
+.tv-star {
+  position: absolute;
+  color: #cfeaff;
+  opacity: 0;
+  text-shadow: 0 0 10px rgba(180,225,255,.85);
+  will-change: transform, opacity;
+  transform: translate3d(0,0,0);
+}
+.transition-overlay.active .tv-star {
+  animation: starSweep 1.7s cubic-bezier(.4,.1,.5,.9) forwards;
+  animation-delay: var(--d);
+}
+@keyframes starSweep {
+  0%   { opacity: 0; transform: translate3d(-40px, -40px, 0) scale(.4) rotate(0deg); }
+  25%  { opacity: 1; transform: translate3d(0, 0, 0) scale(1.25) rotate(120deg); }
+  70%  { opacity: 1; transform: translate3d(0, 0, 0) scale(1) rotate(240deg); }
+  100% { opacity: .5; transform: translate3d(0, 0, 0) scale(.95) rotate(360deg); }
+}
+
+/* ============ MISC ============ */
+@media (max-width: 380px) {
+  .card { padding: 26px 18px; }
+  .photo-title { font-size: 24px; }
+  .keypad { gap: 10px; max-width: 250px; }
+  .keypad-btn { font-size: 20px; }
+  .song-key { height: 100px; }
+  .reel-track { height: 140px; }
+  .heading { font-size: 23px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="background">
+  <div class="glow one"></div>
+  <div class="glow two"></div>
+</div>
+
+<!-- TRANSITION OVERLAY -->
+<div class="transition-overlay" id="transitionOverlay"></div>
+
+<div class="container">
+
+  <div class="stepper" id="stepper"></div>
+
+  <!-- 1. OPENING -->
+  <section class="screen active" id="start">
+    <div class="card">
+      <div class="birthday-deco">
+        <div class="ring r1"></div>
+        <div class="ring r2"></div>
+        <div class="moon"></div>
+        <span class="spark s1">✦</span>
+        <span class="spark s2">✧</span>
+        <span class="spark s3">✦</span>
+        <span class="spark s4">✧</span>
+      </div>
+
+      <div class="title">Happy Birthday<br>Abiyan</div>
+      <p class="subtitle">Bro umurnya nambah loh ya</p>
+      <button class="button" onclick="startExperience()">Klik di sini</button>
+    </div>
+  </section>
+
+  <!-- 2. NAME -->
+  <section class="screen" id="name">
+    <div class="card">
+      <p class="mini">LANGKAH 1</p>
+      <h2 class="heading">Siapa nama kamu?</h2>
+      <p class="text">Tulis nama kamu sebelum kita mulai.</p>
+
+      <div class="field">
+        <input class="input" id="nameInput" type="text" placeholder=" " autocomplete="off">
+        <label for="nameInput">Nama kamu</label>
+      </div>
+
+      <div class="error" id="nameError"></div>
+      <button class="button" onclick="checkName()">Lanjut</button>
+    </div>
+  </section>
+
+  <!-- 3. PIN PASSWORD -->
+  <section class="screen" id="password">
+    <div class="card">
+      <p class="mini">LANGKAH 2</p>
+      <h2 class="heading">Masukkan PIN</h2>
+      <p class="text">Kira-kira kapan kamu lahir?</p>
+
+      <div class="pin-display" id="pinDisplay">
+        <div class="pin-dot" data-i="0"></div>
+        <div class="pin-dot" data-i="1"></div>
+        <div class="pin-dot" data-i="2"></div>
+        <div class="pin-dot" data-i="3"></div>
+      </div>
+
+      <div class="keypad" id="keypad">
+        <button class="keypad-btn" data-num="1">1</button>
+        <button class="keypad-btn" data-num="2">2</button>
+        <button class="keypad-btn" data-num="3">3</button>
+        <button class="keypad-btn" data-num="4">4</button>
+        <button class="keypad-btn" data-num="5">5</button>
+        <button class="keypad-btn" data-num="6">6</button>
+        <button class="keypad-btn" data-num="7">7</button>
+        <button class="keypad-btn" data-num="8">8</button>
+        <button class="keypad-btn" data-num="9">9</button>
+        <button class="keypad-btn empty"></button>
+        <button class="keypad-btn" data-num="0">0</button>
+        <button class="keypad-btn action" data-action="delete">⌫</button>
+      </div>
+
+      <p class="password-hint">PIN: tanggal + bulan &nbsp;•&nbsp; contoh: 1010</p>
+      <div class="error" id="passwordError"></div>
+    </div>
+  </section>
+
+  <!-- 4. FISHING GAME -->
+  <section class="screen" id="fishGame">
+    <div class="card">
+      <p class="mini">LANGKAH 3</p>
+      <h2 class="heading">Waktunya mancing</h2>
+      <p class="text">Lempar kail, tunggu sambarannya, lalu tahan layar untuk menjaga kail tetap di ikan sampai penuh.</p>
+
+      <div class="pond" id="pond">
+        <div class="bobber" id="bobber">🎣</div>
+      </div>
+
+      <div class="reel-wrap" id="reelWrap">
+        <div class="reel-track" id="reelTrack">
+          <div class="reel-fish" id="reelFish">🐟</div>
+          <div class="reel-bar" id="reelBar"></div>
+        </div>
+        <div class="reel-progress-track"><div class="reel-progress-fill" id="reelProgressFill"></div></div>
+        <p class="reel-hint">Tahan layar saat kail berada di ikan</p>
+      </div>
+
+      <p class="game-status" id="fishStatus">Tekan lempar untuk mulai.</p>
+      <button class="button" id="fishActionBtn" onclick="fishAction()">Lempar Kail</button>
+    </div>
+  </section>
+
+  <!-- 5. SONG GAME -->
+  <section class="screen" id="songGame">
+    <div class="card">
+      <p class="mini">LANGKAH 4</p>
+      <h2 class="heading">Mainkan lagunya</h2>
+      <p class="text">Tekan tuts sesuai not yang ditampilkan untuk memainkan Twinkle Twinkle Little Star.</p>
+
+      <p class="song-target">Mainkan not: <span id="songTargetNote">do</span></p>
+
+      <div class="song-keys" id="songKeys"></div>
+      <p class="game-status" id="songStatus">Tekan tuts yang sesuai.</p>
+      <p class="game-progress" id="songProgress">0 / 14</p>
+    </div>
+  </section>
+
+  <!-- 6. CONSTELLATION GAME -->
+  <section class="screen" id="skyGame">
+    <div class="card">
+      <p class="mini">LANGKAH 5</p>
+      <h2 class="heading">Rangkai bintangnya</h2>
+      <p class="text">Sentuh bintang satu per satu sampai membentuk sebuah pola.</p>
+
+      <div class="sky-wrap" id="skyWrap">
+        <svg class="sky-svg" id="skySvg" viewBox="0 0 100 75" preserveAspectRatio="none"></svg>
+      </div>
+
+      <p class="game-status" id="skyStatus">Sentuh bintang mana saja untuk mulai.</p>
+      <p class="game-progress" id="skyProgress">0 / 6</p>
+    </div>
+  </section>
+
+  <!-- 7. PHOTO CHOICE -->
+  <section class="screen" id="photoGame">
+    <div class="card">
+      <p class="mini">LANGKAH TERAKHIR</p>
+      <h2 class="photo-title">Siapakah Abi?</h2>
+      <p class="photo-subtitle">Pilih satu foto yang menurutmu benar.</p>
+
+      <div class="photos">
+        <div class="photo-option" onclick="choosePhoto(1, this)"><img src="abi1.jpg" alt="Pilihan 1" loading="lazy"></div>
+        <div class="photo-option" onclick="choosePhoto(2, this)"><img src="abi2.jpg" alt="Pilihan 2" loading="lazy"></div>
+        <div class="photo-option" onclick="choosePhoto(3, this)"><img src="abi3.jpg" alt="Pilihan 3" loading="lazy"></div>
+        <div class="photo-option" onclick="choosePhoto(4, this)"><img src="abi4.jpg" alt="Pilihan 4" loading="lazy"></div>
+      </div>
+
+      <p class="choice-result" id="choiceResult"></p>
+    </div>
+  </section>
+
+  <!-- 8. BIRTHDAY MESSAGE -->
+  <section class="screen" id="birthday">
+    <div class="card">
+      <p class="mini">YOU MADE IT</p>
+      <div class="title">Happy Birthday,<br><span id="birthdayName">Abiyan</span></div>
+      <p class="subtitle">Kiw kiw wkwk</p>
+
+      <div class="story-card">
+        <p>Selamat ulang tahun, Bro Abiyan.</p>
+        <p>Semoga di umur yang baru ini lu makin sehat, banyak rezeki, makin lancar semua urusannya, dan pastinya makin banyak hal baik yang datang.</p>
+        <p>Semoga apa yang lagi lu usahain sekarang bisa berjalan sesuai yang lu mau. Dan tahun ini juga bisa jadi tahun yang lebih baik buat lu.</p>
+        <p>Pokoknya, makasih juga udah jadi temen yang asik selama ini.</p>
+        <p>Have a good day, traktirannya jangan lupa ya wkwkwk. HBD sekali lagi! 🎉</p>
+      </div>
+
+      <button class="button" onclick="goToSecret()">Ada pesan terakhir</button>
+    </div>
+  </section>
+
+  <!-- 9. SECRET MESSAGE -->
+  <section class="screen" id="secret">
+    <div class="card">
+      <p class="mini">NOTE</p>
+      <h2 class="heading">Bonus</h2>
+
+      <img src="abi5.jpg" alt="Bonus photo" class="bonus-photo" loading="lazy">
+
+      <p class="text" style="text-align:center;">
+        — From your Sis, Kayla.
+      </p>
+
+      <a href="https://kaylazd.github.io/buat-kado/flower.html" target="_blank" class="button">
+        Nih bunga
+      </a>
+    </div>
+  </section>
+
+</div>
+
+<script>
+/* ================= STARS (RINGAN: cuma 18, animasi opacity) ================= */
+const background = document.querySelector(".background");
+for (let i = 0; i < 18; i++) {
+  const star = document.createElement("div");
+  star.className = "star";
+  star.style.left = Math.random() * 100 + "%";
+  star.style.top = Math.random() * 100 + "%";
+  star.style.animationDelay = (Math.random() * 4) + "s";
+  star.style.animationDuration = (3 + Math.random() * 2) + "s";
+  background.appendChild(star);
+}
+
+/* ================= STEPPER ================= */
+const stepOrder = ["name","password","fishGame","songGame","skyGame","photoGame","birthday","secret"];
+const stepperEl = document.getElementById("stepper");
+stepOrder.forEach(() => {
+  const d = document.createElement("div");
+  d.className = "dot";
+  stepperEl.appendChild(d);
+});
+function updateStepper(id) {
+  const idx = stepOrder.indexOf(id);
+  if (idx === -1) { stepperEl.classList.remove("show"); return; }
+  stepperEl.classList.add("show");
+  [...stepperEl.children].forEach((dot, i) => {
+    dot.classList.toggle("done", i < idx);
+    dot.classList.toggle("current", i === idx);
+  });
+}
+
+/* ============================================================
+   TRANSITION SYSTEM - STAR SWEEP (RINGAN)
+   ============================================================ */
+const transitionOverlay = document.getElementById("transitionOverlay");
+let isTransitioning = false;
+
+function buildStarTransition() {
+  // Buat fragment dulu, baru append sekali (lebih efisien)
+  const frag = document.createDocumentFragment();
+
+  const layer = document.createElement("div");
+  layer.className = "tv-star-layer";
+  frag.appendChild(layer);
+
+  const glyphs = ["✦","✧","★","✩","⋆"];
+  for (let i = 0; i < 24; i++) {
+    const s = document.createElement("div");
+    s.className = "tv-star";
+    s.textContent = glyphs[i % glyphs.length];
+    s.style.left = (Math.random() * 100) + "%";
+    s.style.top  = (Math.random() * 100) + "%";
+    s.style.fontSize = (16 + Math.random() * 24) + "px";
+    s.style.setProperty("--d", (Math.random() * 0.5) + "s");
+    frag.appendChild(s);
+  }
+
+  transitionOverlay.className = "transition-overlay";
+  transitionOverlay.innerHTML = "";
+  transitionOverlay.appendChild(frag);
+}
+
+function goTo(id) {
+  if (isTransitioning) return;
+  isTransitioning = true;
+
+  buildStarTransition();
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      transitionOverlay.classList.add("active");
+    });
+  });
+
+  // Ganti halaman saat layar sudah tertutup
+  setTimeout(() => {
+    document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+    updateStepper(id);
+    window.scrollTo(0, 0);
+  }, 850);
+
+  // Selesai total
+  setTimeout(() => {
+    transitionOverlay.classList.remove("active");
+    setTimeout(() => {
+      transitionOverlay.className = "transition-overlay";
+      transitionOverlay.innerHTML = "";
+      isTransitioning = false;
+    }, 450);
+  }, 1750);
+}
+
+/* ================= BIRTHDAY SONG ================= */
+let birthdaySongPlayed = false;
+function playBirthdaySong() {
+  if (birthdaySongPlayed) return;
+  birthdaySongPlayed = true;
+
+  const audio = getAudioContext();
+  if (audio.state === "suspended") audio.resume();
+
+  const notes = [
+    { f: 392.00, d: 0.3 }, { f: 392.00, d: 0.3 }, { f: 440.00, d: 0.5 }, { f: 392.00, d: 0.5 }, { f: 523.25, d: 0.5 }, { f: 493.88, d: 0.8 },
+    { f: 392.00, d: 0.3 }, { f: 392.00, d: 0.3 }, { f: 440.00, d: 0.5 }, { f: 392.00, d: 0.5 }, { f: 587.33, d: 0.5 }, { f: 523.25, d: 0.8 },
+    { f: 392.00, d: 0.3 }, { f: 392.00, d: 0.3 }, { f: 783.99, d: 0.5 }, { f: 659.25, d: 0.5 }, { f: 523.25, d: 0.5 }, { f: 493.88, d: 0.5 }, { f: 440.00, d: 0.8 },
+    { f: 698.46, d: 0.3 }, { f: 698.46, d: 0.3 }, { f: 659.25, d: 0.5 }, { f: 523.25, d: 0.5 }, { f: 587.33, d: 0.5 }, { f: 523.25, d: 1.0 }
+  ];
+
+  let t = audio.currentTime + 0.1;
+
+  notes.forEach(note => {
+    const osc = audio.createOscillator();
+    const gain = audio.createGain();
+    osc.type = "triangle";
+    osc.frequency.value = note.f;
+    osc.connect(gain);
+    gain.connect(audio.destination);
+
+    gain.gain.setValueAtTime(0, t);
+    gain.gain.linearRampToValueAtTime(0.1, t + 0.03);
+    gain.gain.exponentialRampToValueAtTime(0.001, t + note.d);
+
+    osc.start(t);
+    osc.stop(t + note.d);
+    t += note.d * 0.92;
+  });
+}
+
+function startExperience() {
+  goTo("name");
+}
+
+/* ================= NAME ================= */
+let playerName = "";
+const nameInputEl = document.getElementById("nameInput");
+nameInputEl.addEventListener("input", () => {
+  nameInputEl.classList.toggle("filled", nameInputEl.value.trim() !== "");
+});
+function checkName() {
+  const error = document.getElementById("nameError");
+  if (nameInputEl.value.trim() === "") {
+    error.textContent = "Isi namanya dulu.";
+    error.classList.remove("shake"); void error.offsetWidth; error.classList.add("shake");
+    return;
+  }
+  error.textContent = "";
+  playerName = nameInputEl.value.trim();
+  goTo("password");
+}
+
+/* ================= PIN ================= */
+const correctPassword = "0610";
+let pinValue = "";
+
+const pinDots = [...document.querySelectorAll(".pin-dot")];
+const keypadEl = document.getElementById("keypad");
+const passwordErrorEl = document.getElementById("passwordError");
+
+keypadEl.addEventListener("click", (e) => {
+  const btn = e.target.closest(".keypad-btn");
+  if (!btn || btn.classList.contains("empty")) return;
+
+  if (btn.dataset.action === "delete") {
+    pinValue = pinValue.slice(0, -1);
+    renderPin();
+    return;
+  }
+
+  const num = btn.dataset.num;
+  if (num && pinValue.length < 4) {
+    pinValue += num;
+    renderPin();
+    playNote(500 + parseInt(num) * 30, .12);
+    if (pinValue.length === 4) {
+      setTimeout(checkPassword, 150);
+    }
+  }
+});
+
+function renderPin() {
+  pinDots.forEach((dot, i) => {
+    dot.classList.toggle("filled", i < pinValue.length);
+    dot.classList.remove("error");
+  });
+}
+
+function checkPassword() {
+  if (pinValue === correctPassword) {
+    passwordErrorEl.textContent = "";
+    createFishGame();
+    goTo("fishGame");
+  } else {
+    passwordErrorEl.textContent = "PIN-nya belum tepat. Coba lagi.";
+    pinDots.forEach(d => { d.classList.remove("error"); void d.offsetWidth; d.classList.add("error"); });
+    setTimeout(() => { pinValue = ""; renderPin(); }, 300);
+  }
+}
+
+/* ================= AUDIO ================= */
+let audioContext = null;
+function getAudioContext() {
+  if (!audioContext) audioContext = new (window.AudioContext || window.webkitAudioContext)();
+  return audioContext;
+}
+function playNote(frequency, duration = .45) {
+  const audio = getAudioContext();
+  if (audio.state === "suspended") audio.resume();
+  const oscillator = audio.createOscillator();
+  const gain = audio.createGain();
+  oscillator.type = "sine";
+  oscillator.frequency.value = frequency;
+  oscillator.connect(gain);
+  gain.connect(audio.destination);
+  const now = audio.currentTime;
+  gain.gain.setValueAtTime(0, now);
+  gain.gain.linearRampToValueAtTime(.15, now + .02);
+  gain.gain.exponentialRampToValueAtTime(.001, now + duration);
+  oscillator.start(now);
+  oscillator.stop(now + duration);
+}
+const pianoNotes = [261.63, 293.66, 329.63, 349.23, 392.00, 440.00, 493.88, 523.25, 587.33];
+
+/* ================= FISHING GAME (SMOOTH: pakai translateY) ================= */
+let fishState = "idle";
+let fishBiteTimeout = null;
+let fishMissTimeout = null;
+let reelRafId = null;
+let reelHolding = false;
+let reelLastTime = null;
+let reelFishPos = 0.5;
+let reelFishTarget = 0.5;
+let reelFishTimer = 0;
+let reelBarPos = 0.5;
+let reelProgress = 0.3;
+
+const REEL_BAR_HALF = 0.12;
+const REEL_MARGIN = 0.08;
+const REEL_TRACK_H = 160;
+
+const fishStatusEl = document.getElementById("fishStatus");
+const fishActionBtn = document.getElementById("fishActionBtn");
+const bobberEl = document.getElementById("bobber");
+const reelWrapEl = document.getElementById("reelWrap");
+const reelTrackEl = document.getElementById("reelTrack");
+const reelFishEl = document.getElementById("reelFish");
+const reelBarEl = document.getElementById("reelBar");
+const reelProgressFillEl = document.getElementById("reelProgressFill");
+
+function createFishGame() {
+  clearTimeout(fishBiteTimeout);
+  clearTimeout(fishMissTimeout);
+  if (reelRafId) cancelAnimationFrame(reelRafId);
+  fishState = "idle";
+  reelHolding = false;
+  reelWrapEl.classList.remove("active");
+  bobberEl.classList.remove("bite");
+  fishActionBtn.disabled = false;
+  fishActionBtn.textContent = "Lempar Kail";
+  fishStatusEl.textContent = "Tekan lempar untuk mulai.";
+  reelProgress = 0.3;
+  reelProgressFillEl.style.width = "30%";
+}
+
+function fishAction() {
+  if (fishState === "idle") castLine();
+  else if (fishState === "bite") hookFish();
+}
+
+function castLine() {
+  fishState = "waiting";
+  fishActionBtn.disabled = true;
+  fishActionBtn.textContent = "Menunggu...";
+  fishStatusEl.textContent = "Menunggu ikan menyambar...";
+  bobberEl.classList.remove("bite");
+
+  const delay = 1400 + Math.random() * 1600;
+  fishBiteTimeout = setTimeout(triggerBite, delay);
+}
+
+function triggerBite() {
+  if (fishState !== "waiting") return;
+  fishState = "bite";
+  bobberEl.classList.add("bite");
+  fishStatusEl.textContent = "Ada yang gigit! Tarik sekarang!";
+  fishActionBtn.disabled = false;
+  fishActionBtn.textContent = "Tarik!";
+  playNote(392, .25);
+
+  fishMissTimeout = setTimeout(missBite, 1200);
+}
+
+function missBite() {
+  if (fishState !== "bite") return;
+  fishState = "idle";
+  bobberEl.classList.remove("bite");
+  fishActionBtn.disabled = false;
+  fishActionBtn.textContent = "Lempar Kail";
+  fishStatusEl.textContent = "Kailnya lepas duluan, coba lagi.";
+}
+
+function hookFish() {
+  clearTimeout(fishMissTimeout);
+  fishState = "reeling";
+  fishActionBtn.disabled = true;
+  fishActionBtn.textContent = "Sedang menarik...";
+  fishStatusEl.textContent = "Tahan layar saat kail berada di ikan.";
+  reelWrapEl.classList.add("active");
+
+  reelFishPos = 0.5;
+  reelFishTarget = Math.random();
+  reelFishTimer = 0;
+  reelBarPos = 0.5;
+  reelProgress = 0.3;
+  reelHolding = false;
+  reelLastTime = null;
+
+  reelRafId = requestAnimationFrame(reelLoop);
+}
+
+function reelLoop(timestamp) {
+  if (reelLastTime === null) reelLastTime = timestamp;
+  const dt = Math.min((timestamp - reelLastTime) / 1000, .05);
+  reelLastTime = timestamp;
+
+  reelFishTimer -= dt;
+  if (reelFishTimer <= 0) {
+    reelFishTarget = REEL_MARGIN + Math.random() * (1 - 2 * REEL_MARGIN);
+    reelFishTimer = 0.5 + Math.random() * 0.7;
+  }
+  reelFishPos += (reelFishTarget - reelFishPos) * Math.min(1, dt * 3.2);
+
+  const barVel = reelHolding ? -1.25 : 1.55;
+  reelBarPos += barVel * dt;
+  reelBarPos = Math.max(REEL_BAR_HALF, Math.min(1 - REEL_BAR_HALF, reelBarPos));
+
+  const overlap = Math.abs(reelFishPos - reelBarPos) < (REEL_BAR_HALF + 0.02);
+  reelProgress += (overlap ? 0.55 : -0.35) * dt;
+  reelProgress = Math.max(0, Math.min(1, reelProgress));
+
+  renderReel();
+
+  if (reelProgress >= 1) { winFish(); return; }
+  if (reelProgress <= 0) { loseFish(); return; }
+  reelRafId = requestAnimationFrame(reelLoop);
+}
+
+function renderReel() {
+  // Pakai translateY (GPU-accelerated)
+  const fishY = reelFishPos * REEL_TRACK_H - REEL_TRACK_H / 2;
+  const barY = (reelBarPos - REEL_BAR_HALF) * REEL_TRACK_H;
+  const barH = REEL_BAR_HALF * 2 * REEL_TRACK_H;
+
+  reelFishEl.style.transform = `translate3d(-50%, ${fishY}px, 0) scaleX(-1)`;
+  reelBarEl.style.transform = `translate3d(0, ${barY}px, 0)`;
+  reelBarEl.style.height = barH + "px";
+  reelProgressFillEl.style.width = (reelProgress * 100) + "%";
+}
+
+reelTrackEl.addEventListener("pointerdown", e => { e.preventDefault(); reelHolding = true; });
+window.addEventListener("pointerup", () => { reelHolding = false; });
+window.addEventListener("pointercancel", () => { reelHolding = false; });
+reelTrackEl.addEventListener("pointerleave", () => { reelHolding = false; });
+
+function winFish() {
+  fishState = "done";
+  reelWrapEl.classList.remove("active");
+  fishStatusEl.textContent = "Ikan berhasil ditangkap!";
+  [523.25, 587.33, 659.25].forEach((f, i) => setTimeout(() => playNote(f, .35), i * 140));
+  setTimeout(() => { createSongGame(); goTo("songGame"); }, 1100);
+}
+
+function loseFish() {
+  fishState = "idle";
+  reelWrapEl.classList.remove("active");
+  fishActionBtn.disabled = false;
+  fishActionBtn.textContent = "Lempar Kail";
+  fishStatusEl.textContent = "Ikannya lepas, coba lagi.";
+}
+
+/* ================= SONG GAME ================= */
+const songNoteLabels = ["do", "re", "mi", "fa", "sol", "la"];
+const twinkleSequence = [0,0,4,4,5,5,4, 3,3,2,2,1,1,0];
+let songProgress = 0;
+let songLocked = false;
+let songKeyEls = [];
+
+function createSongGame() {
+  const row = document.getElementById("songKeys");
+  row.innerHTML = "";
+  songKeyEls = [];
+  songProgress = 0;
+  songLocked = false;
+  updateProgress("songProgress", 0, twinkleSequence.length);
+  document.getElementById("songStatus").textContent = "Tekan tuts yang sesuai.";
+
+  songNoteLabels.forEach((label, i) => {
+    const key = document.createElement("div");
+    key.className = "song-key";
+    key.textContent = label;
+    key.addEventListener("click", () => pressSongKey(i, key));
+    row.appendChild(key);
+    songKeyEls.push(key);
+  });
+
+  updateSongTarget();
+}
+
+function updateSongTarget() {
+  const targetIndex = twinkleSequence[songProgress];
+  document.getElementById("songTargetNote").textContent = songNoteLabels[targetIndex];
+
+  songKeyEls.forEach(k => k.classList.remove("hint"));
+  if (songKeyEls[targetIndex]) songKeyEls[targetIndex].classList.add("hint");
+}
+
+function pressSongKey(index, el) {
+  if (songLocked) return;
+  playNote(pianoNotes[index], .4);
+
+  const expected = twinkleSequence[songProgress];
+  if (index === expected) {
+    el.classList.add("correct");
+    setTimeout(() => el.classList.remove("correct"), 260);
+    songProgress++;
+    updateProgress("songProgress", songProgress, twinkleSequence.length);
+    document.getElementById("songStatus").textContent = "Pas. Lanjutkan.";
+
+    if (songProgress === twinkleSequence.length) {
+      songLocked = true;
+      songKeyEls.forEach(k => k.classList.remove("hint"));
+      document.getElementById("songTargetNote").textContent = "selesai";
+      document.getElementById("songStatus").textContent = "Lagunya selesai dimainkan.";
+      setTimeout(() => { createSkyGame(); goTo("skyGame"); }, 1000);
+    } else {
+      updateSongTarget();
+    }
+    return;
+  }
+
+  el.classList.add("wrong");
+  document.getElementById("songStatus").textContent = "Bukan itu, ikuti not yang ditampilkan.";
+  setTimeout(() => el.classList.remove("wrong"), 350);
+}
+
+/* ================= CONSTELLATION ================= */
+const skyPoints = [
+  { x: 50, y: 10 }, { x: 78, y: 24 }, { x: 78, y: 52 },
+  { x: 50, y: 66 }, { x: 22, y: 52 }, { x: 22, y: 24 }
+];
+let skyProgress = 0;
+let skyLocked = false;
+
+function createSkyGame() {
+  const wrap = document.getElementById("skyWrap");
+  const svg = document.getElementById("skySvg");
+  svg.innerHTML = "";
+  wrap.querySelectorAll(".sky-star").forEach(el => el.remove());
+  skyProgress = 0;
+  skyLocked = false;
+  updateProgress("skyProgress", 0, skyPoints.length);
+  document.getElementById("skyStatus").textContent = "Sentuh bintang mana saja untuk mulai.";
+
+  const frag = document.createDocumentFragment();
+  skyPoints.forEach((pt, i) => {
+    const star = document.createElement("div");
+    star.className = "sky-star";
+    star.style.left = pt.x + "%";
+    star.style.top = (pt.y / 75 * 100) + "%";
+    star.addEventListener("click", () => pressSkyStar(i, star));
+    frag.appendChild(star);
+  });
+  wrap.appendChild(frag);
+}
+
+function pressSkyStar(index, el) {
+  if (skyLocked || el.classList.contains("lit")) return;
+  playNote(440 + index * 40, .3);
+
+  if (index === skyProgress) {
+    el.classList.add("lit");
+    if (skyProgress > 0) drawSkyLine(skyPoints[skyProgress - 1], skyPoints[skyProgress]);
+    skyProgress++;
+    updateProgress("skyProgress", skyProgress, skyPoints.length);
+    document.getElementById("skyStatus").textContent = "Bagus, terus lanjutkan.";
+
+    if (skyProgress === skyPoints.length) {
+      skyLocked = true;
+      document.getElementById("skyStatus").textContent = "Pola selesai terbentuk.";
+      setTimeout(() => goTo("photoGame"), 1000);
+    }
+    return;
+  }
+
+  el.classList.add("wrong");
+  document.getElementById("skyStatus").textContent = "Belum urutan yang benar.";
+  setTimeout(() => el.classList.remove("wrong"), 350);
+}
+
+function drawSkyLine(a, b) {
+  const svg = document.getElementById("skySvg");
+  const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+  line.setAttribute("x1", a.x); line.setAttribute("y1", a.y);
+  line.setAttribute("x2", a.x); line.setAttribute("y2", a.y);
+  svg.appendChild(line);
+  requestAnimationFrame(() => {
+    line.style.transition = "x2 .4s ease, y2 .4s ease";
+    line.setAttribute("x2", b.x);
+    line.setAttribute("y2", b.y);
+  });
+}
+
+/* ================= SHARED PROGRESS ================= */
+function updateProgress(id, current, total) {
+  document.getElementById(id).textContent = current + " / " + total;
+}
+
+/* ================= PHOTO GAME ================= */
+const correctPhoto = 3;
+function choosePhoto(photoNumber, element) {
+  const result = document.getElementById("choiceResult");
+  document.querySelectorAll(".photo-option").forEach(el => el.classList.remove("selected"));
+  element.classList.add("selected");
+
+  if (photoNumber === correctPhoto) {
+    element.classList.add("correct");
+    result.textContent = "Benar. Kamu menemukan Abi.";
+    setTimeout(() => {
+      document.getElementById("birthdayName").textContent = playerName;
+      goTo("birthday");
+      launchConfetti();
+      playBirthdaySong();
+    }, 900);
+    return;
+  }
+
+  element.classList.add("wrong");
+  result.textContent = "Bukan yang ini. Coba lihat lagi.";
+  setTimeout(() => element.classList.remove("wrong"), 400);
+}
+
+/* ================= SECRET ================= */
+function goToSecret() {
+  goTo("secret");
+  launchConfetti();
+  addSecretDrift();
+}
+function addSecretDrift() {
+  const box = document.querySelector("#secret .card");
+  if (!box) return;
+  box.querySelectorAll(".secret-drift").forEach(el => el.remove());
+  const glyphs = ["✦","✧","·"];
+  const frag = document.createDocumentFragment();
+  for (let i = 0; i < 5; i++) {
+    const d = document.createElement("span");
+    d.className = "secret-drift";
+    d.textContent = glyphs[Math.floor(Math.random() * glyphs.length)];
+    d.style.left = (10 + Math.random() * 80) + "%";
+    d.style.bottom = "0px";
+    d.style.animationDelay = (Math.random() * 5) + "s";
+    d.style.animationDuration = (6 + Math.random() * 3) + "s";
+    frag.appendChild(d);
+  }
+  box.appendChild(frag);
+}
+
+/* ================= CONFETTI (RINGAN: 30 pieces) ================= */
+function launchConfetti() {
+  const colors = ["#72caff", "#ffffff", "#318ed0", "#a7e2ff", "#ffd88a"];
+  const frag = document.createDocumentFragment();
+  for (let i = 0; i < 30; i++) {
+    const piece = document.createElement("div");
+    piece.className = "confetti";
+    piece.style.left = Math.random() * 100 + "vw";
+    piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+    piece.style.animationDuration = (2.5 + Math.random() * 2.5) + "s";
+    frag.appendChild(piece);
+    setTimeout(() => piece.remove(), 5200);
+  }
+  document.body.appendChild(frag);
+}
+
+/* ================= ENTER ================= */
+nameInputEl.addEventListener("keydown", e => { if (e.key === "Enter") checkName(); });
+</script>
+
+</body>
+</html>
